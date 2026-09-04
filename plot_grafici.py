@@ -30,8 +30,9 @@ reciproci = 1/rapps
 std_rec = stds / rapps**2
 
 plt.figure(figsize=(10,6))
-plt.errorbar(numeri_Pe, reciproci, yerr=std_rec, color='purple', fmt='o', label='$\\varsigma=\\frac{v}{\\mu\\cdot\\text{moda}(\\nabla U)}$')
-plt.axhline(1, color='gray', linestyle='--')
+plt.errorbar(numeri_Pe, reciproci, yerr=std_rec, color='darkorange', fmt='o', 
+             label='$\\varsigma=\\frac{v}{\\mu\\cdot||\\nabla U(r_{\\text{moda}})||}$')
+plt.axhline(1, color='gray', linestyle='--', label='$\\varsigma$ = 1')
 #plt.xscale('log')
 plt.legend(loc='center right', fontsize=30)
 
@@ -45,12 +46,15 @@ dati_output = np.array([numeri_Pe, reciproci, std_rec, percs])
 np.savetxt(Path.cwd()/'dati_sigma.txt', dati_output)
 
 plt.figure(figsize=(10,6))
-plt.errorbar(numeri_Pe, percs, yerr=0, color='green', fmt='o', label='SC')
+plt.errorbar(numeri_Pe, percs, yerr=0, color='purple', fmt='o', 
+             label='SC=$\\frac{\\text{conteggi centrali}}{\\text{conteggi totali}}$')
 #plt.xscale('log')
-plt.legend(loc='upper right', fontsize=10)
-plt.axhline(0, color='gray', linestyle='--')
+plt.axhline(0, color='gray', linestyle='--', label='SC=0')
+plt.legend(loc='upper right', fontsize=20)
 
+plt.title('Saddle-Crossing')
 plt.xlabel('Pe')
+plt.ylabel('SC')
 plt.ticklabel_format(axis='y', style='sci', scilimits=(0,0))
 plt.savefig(Path.cwd() /'Grafici/SC.svg')
 plt.savefig(Path.cwd() /'Grafici/SC.png', dpi=1200, )
